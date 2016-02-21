@@ -10,7 +10,7 @@ $ npm install npm-install-all -g
 ## Usage
 
 ```
-$ npm-install-all '<filename>'
+$ npm-install-all <filename>
 ```
 
 ## Example
