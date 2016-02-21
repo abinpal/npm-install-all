@@ -41,7 +41,10 @@ function runningCommand(modules){
 var compute = function() {
 
   return new Promise(function(resolve) {
+          if(process.argv[2]!=null)
             storingModuleNames();
+          else
+            console.error('A filename should be passed as argument');
         })
         .catch(function (e) {
             throw e;
