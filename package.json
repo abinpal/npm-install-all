@@ -1,7 +1,7 @@
 {
   "name": "npm-install-all",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a npm module to install all npm packages and save it in package.json",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +13,11 @@
   "author": "Abin Pal",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AbinPal/npm-install-all/issues"
+    "url": "https://github.com/abinpal/npm-install-all/issues"
   },
-  "homepage": "https://github.com/AbinPal/npm-install-all#readme"
+  "homepage": "https://github.com/abinpal/npm-install-all#readme",
+  "dependencies": {
+    "bluebird": "^3.3.1",
+    "line-reader": "^0.3.0"
+  }
 }
