@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 
 var lineReader = require('line-reader');
 var sys = require('sys');
