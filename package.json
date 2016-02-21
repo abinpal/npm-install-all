@@ -20,6 +20,9 @@
     "bluebird": "^3.3.1",
     "line-reader": "^0.3.0"
   },
+  "bin" : {
+    "npm-install-all" : "index.js"
+  },
   "keywords": [
     "node",
     "npm",
