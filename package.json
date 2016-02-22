@@ -1,6 +1,6 @@
 {
   "name": "npm-install-all",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "This is a npm module to install all npm packages and save it in package.json",
   "main": "index.js",
   "scripts": {

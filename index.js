@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 var lineReader = require('line-reader');
-var sys = require('sys');
 var exec = require('child_process').exec;
 var Promise = require('bluebird');
 
