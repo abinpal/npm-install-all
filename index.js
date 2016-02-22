@@ -32,7 +32,7 @@ function runningCommand(modules){
       var globalCommand = 'npm install -g '+modules[module];
       var localCommand = 'npm install '+modules[module]+' --save';
       
-      function puts(error, stdout, stderr) { sys.puts(stdout) }
+      function puts(error, stdout, stderr) { console.log(stdout) }
       exec(globalCommand, puts);
       exec(localCommand, puts);
     }
