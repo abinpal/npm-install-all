@@ -1,6 +1,6 @@
 {
   "name": "npm-install-all",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "This is a npm module to install all npm packages and save it in package.json",
   "main": "index.js",
   "scripts": {
@@ -20,8 +20,8 @@
     "bluebird": "^3.3.1",
     "line-reader": "^0.3.0"
   },
-  "bin" : {
-    "npm-install-all" : "index.js"
+  "bin": {
+    "npm-install-all": "index.js"
   },
   "keywords": [
     "node",
