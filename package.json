@@ -1,7 +1,7 @@
 {
   "name": "npm-install-all",
   "version": "1.0.7",
-  "description": "This is a npm module to install all npm packages and save it in package.json",
+  "description": "This is a npm module to install all dependent npm packages for a particular file and save it in package.json. If there doesnt exist a package.json, it creates it and saves the dependencies in it",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
