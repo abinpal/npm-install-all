@@ -3,6 +3,9 @@
 var lineReader = require('line-reader');
 var exec = require('child_process').exec;
 var Promise = require('bluebird');
+var Handlebars = require('handlebars');
+var fs = require('fs');
+var path = require('path');
 
 var moduleArr = []; 
 var fileName = process.argv[2];
@@ -29,20 +32,36 @@ var eachLine = Promise.promisify(lineReader.eachLine);
 function runningCommand(modules){
     for (var module in modules){
 
-      var globalCommand = 'npm install -g '+modules[module];
       var localCommand = 'npm install '+modules[module]+' --save';
       
       function puts(error, stdout, stderr) { console.log(stdout) }
-      exec(globalCommand, puts);
       exec(localCommand, puts);
     }
   };
 
+function checkPackageJSON(){
+    fs.stat('package.json', function(err, stat) {
+      if(err == null) {
+          //console.log('File exists');
+      } else if(err.code == 'ENOENT') {
+          var template = fs.readFileSync('template/template-package-json.hbs').toString();
+          var compiledTemplate = Handlebars.compile(template);
+          var packagejson = JSON.parse(compiledTemplate());
+          fs.writeFile('package.json', JSON.stringify(packagejson, null, "\t"));
+          return;
+      } else {
+          console.log('Some other error: ', err.code);
+      }
+  });
+}
+
 var compute = function() {
 
   return new Promise(function(resolve) {
-          if(process.argv[2]!=null)
+          if(fileName!=null){
+            checkPackageJSON(); 
             storingModuleNames();
+          }
           else
             console.error('A filename should be passed as argument');
         })

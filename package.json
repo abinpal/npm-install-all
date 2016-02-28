@@ -1,6 +1,6 @@
 {
   "name": "npm-install-all",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "This is a npm module to install all npm packages and save it in package.json",
   "main": "index.js",
   "scripts": {
@@ -18,6 +18,7 @@
   "homepage": "https://github.com/abinpal/npm-install-all#readme",
   "dependencies": {
     "bluebird": "^3.3.1",
+    "handlebars": "^4.0.5",
     "line-reader": "^0.3.0"
   },
   "bin": {
