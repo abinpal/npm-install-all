@@ -44,7 +44,9 @@ function checkPackageJSON(){
       if(err == null) {
           //console.log('File exists');
       } else if(err.code == 'ENOENT') {
-          var template = fs.readFileSync('template/template-package-json.hbs').toString();
+          var globalPackagePath = require.resolve('npm-install-all');
+          var globalPackagePathDir = path.dirname(globalPackagePath);
+          var template = fs.readFileSync(globalPackagePathDir + '/template/template-package-json.hbs').toString();
           var compiledTemplate = Handlebars.compile(template);
           var packagejson = JSON.parse(compiledTemplate());
           fs.writeFile('package.json', JSON.stringify(packagejson, null, "\t"));
