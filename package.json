@@ -1,6 +1,6 @@
 {
   "name": "npm-install-all",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "This is a npm module to install all dependent npm packages for a particular file and save it in package.json. If there doesnt exist a package.json, it creates it and saves the dependencies in it",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/abinpal/npm-install-all.git"
   },
   "author": "Abin Pal",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/abinpal/npm-install-all/issues"
   },
