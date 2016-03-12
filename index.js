@@ -5,7 +5,6 @@ var exec = require('child_process').exec;
 var Promise = require('bluebird');
 var Handlebars = require('handlebars');
 var fs = require('fs');
-var path = require('path');
 
 var moduleArr = []; 
 var fileName = process.argv[2];
@@ -44,12 +43,18 @@ function checkPackageJSON(){
       if(err == null) {
           //console.log('File exists');
       } else if(err.code == 'ENOENT') {
-          var globalPackagePath = require.resolve('npm-install-all');
-          var globalPackagePathDir = path.dirname(globalPackagePath);
-          var template = fs.readFileSync(globalPackagePathDir + '/template/template-package-json.hbs').toString();
-          var compiledTemplate = Handlebars.compile(template);
-          var packagejson = JSON.parse(compiledTemplate());
-          fs.writeFile('package.json', JSON.stringify(packagejson, null, "\t"));
+          
+          function puts(error, stdout, stderr) { 
+            var globalModulesPath = stdout;
+            var packageTemplatePath = globalModulesPath.trim() + '\\node_modules\\npm-install-all\\template\\template-package-json.hbs';
+            var template = fs.readFileSync(packageTemplatePath).toString();
+            var compiledTemplate = Handlebars.compile(template);
+            var packagejson = JSON.parse(compiledTemplate());
+            fs.writeFile('package.json', JSON.stringify(packagejson, null, "\t"));
+          }
+
+          var globalPathPrefixCommand = 'npm config get prefix';
+          exec(globalPathPrefixCommand, puts);
           return;
       } else {
           console.log('Some other error: ', err.code);
@@ -58,18 +63,12 @@ function checkPackageJSON(){
 }
 
 var compute = function() {
-
-  return new Promise(function(resolve) {
-          if(fileName!=null){
-            checkPackageJSON(); 
-            storingModuleNames();
-          }
-          else
-            console.error('A filename should be passed as argument');
-        })
-        .catch(function (e) {
-            throw e;
-        });
+  if(fileName!=null){
+    checkPackageJSON(); 
+    storingModuleNames();
+  }
+  else
+    console.error('A filename should be passed as argument');
 };
 
 compute();
