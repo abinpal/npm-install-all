@@ -1,6 +1,6 @@
 {
   "name": "npm-install-all",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "This is a npm module to install all dependent npm packages for a particular file and save it in package.json. If there doesnt exist a package.json, it creates it and saves the dependencies in it. You just need to run this module from the project directory. This module recursively checks all the folders (excluding node_modules folder) and files of the project or folder where you are running this command and install the npm packages that you are using in your project, and finally saves it into package.json.",
   "main": "index.js",
   "scripts": {
@@ -32,7 +32,7 @@
     "npm",
     "installer"
   ],
-  "readme": "# npm-install-all\r\nThis module simply recognizes all the require commands and help you to install all the npm modules and also save it in your package.json.\r\nThis is a pretty cool module which reduces the work of repetitive installation of npm modules which are not present in your package.json to run an application. If there exists a package.json, it saves it as dependencies inside it, else creates it.\r\n\r\n## Install\r\n\r\n```\r\n$ npm install npm-install-all -g\r\n```\r\n\r\n## Usage\r\n\r\n```\r\n$ npm-install-all <filename>\r\n```\r\n\r\n## Example\r\n```\r\n$ npm-install-all test.js\r\n```",
+  "readme": "# npm-install-all\r\nThis module simply recognizes all the require commands and help you to install all the npm modules and also save it in your package.json.\r\nThis is a pretty cool module which reduces the work of repetitive installation of npm modules which are not present in your package.json to run an application. If there exists a package.json, it saves it as dependencies inside it, else creates it.\r\n\nYou just need to run this module from the project directory. This module recursively checks all the folders (excluding node_modules folder) and files of the project or folder where you are running this command and install the npm packages that you are using in your project, and finally saves it into package.json.\r\n\r\n## Install\r\n\r\n```\r\n$ npm install npm-install-all -g\r\n```\r\n\r\n## Usage 1 (For a specific file)\r\n\r\n```\r\n$ npm-install-all <filename>\r\n```\r\n\r\n## Example\r\n```\r\n$ npm-install-all test.js\r\n```\r\n\r\n## Usage 2 (For a complete project or folder)\r\n\r\n```\r\n$ npm-install-all \r\n```\r\n\r\n## Example\r\n\r\n```\r\n$ npm-install-all \r\n```\r\n\r\n## For example if you want to install all the dependent npm modules for the 'demo-project' (currently residing in example folder)\r\nJust go inside the demo-project folder and simply run this command below\r\n\r\n```\r\n$ npm-install-all \r\n```\r\n\r\nYou will see all the node modules installed locally and a 'package.json' being created with all the node modules saved in 'dependencies' property.",
   "readmeFilename": "README.md",
   "gitHead": "549d1329027ce2ea2c187c719d28fa1853103ac3",
   "_id": "npm-install-all@1.0.10",
