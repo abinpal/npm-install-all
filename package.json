@@ -1,6 +1,6 @@
 {
   "name": "npm-install-all",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "description": "This is a npm module to install all dependent npm packages for a particular file and save it in package.json. If there doesnt exist a package.json, it creates it and saves the dependencies in it",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/abinpal/npm-install-all.git"
   },
-  "author": "Abin Pal",
+  "author": {
+    "name": "Abin Pal"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/abinpal/npm-install-all/issues"
@@ -19,7 +21,8 @@
   "dependencies": {
     "bluebird": "^3.3.1",
     "handlebars": "^4.0.5",
-    "line-reader": "^0.3.0"
+    "line-reader": "^0.3.0",
+    "node-dir": "^0.1.12"
   },
   "bin": {
     "npm-install-all": "index.js"
@@ -28,5 +31,11 @@
     "node",
     "npm",
     "installer"
-  ]
+  ],
+  "readme": "# npm-install-all\r\nThis module simply recognizes all the require commands and help you to install all the npm modules and also save it in your package.json.\r\nThis is a pretty cool module which reduces the work of repetitive installation of npm modules which are not present in your package.json to run an application. If there exists a package.json, it saves it as dependencies inside it, else creates it.\r\n\r\n## Install\r\n\r\n```\r\n$ npm install npm-install-all -g\r\n```\r\n\r\n## Usage\r\n\r\n```\r\n$ npm-install-all <filename>\r\n```\r\n\r\n## Example\r\n```\r\n$ npm-install-all test.js\r\n```",
+  "readmeFilename": "README.md",
+  "gitHead": "549d1329027ce2ea2c187c719d28fa1853103ac3",
+  "_id": "npm-install-all@1.0.10",
+  "_shasum": "0f014cb39428b8cc730999dc96901f1ac7b74dfa",
+  "_from": "npm-install-all@*"
 }

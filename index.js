@@ -4,25 +4,28 @@ var lineReader = require('line-reader');
 var exec = require('child_process').exec;
 var Promise = require('bluebird');
 var Handlebars = require('handlebars');
+var dir = require('node-dir');
 var fs = require('fs');
 
 var moduleArr = []; 
 var fileName = process.argv[2];
+var fileNames = [];
 
-function storingModuleNames(){
-
-var eachLine = Promise.promisify(lineReader.eachLine);
-
+function storingModuleNames(fn){
+  var eachLine = Promise.promisify(lineReader.eachLine);
+    if(process.argv[2]==null){
+      fileName = fn;
+    }
     eachLine(fileName, function(line) {
       if (line.indexOf('require') != -1){
       var regex = /require\(([^)]+)\)/g;
       var mat = regex.exec(line);
 
       mat[1] = mat[1].replace(/'/g, '');
-      moduleArr.push(mat[1]);
+      if (moduleArr.indexOf(mat[1]) == -1) {
+        moduleArr.push(mat[1]);
+      }      
     }
-    }).then(function() {
-      runningCommand(moduleArr);
     }).catch(function(err) {
       console.error(err);
     });
@@ -66,9 +69,31 @@ var compute = function() {
   if(fileName!=null){
     checkPackageJSON(); 
     storingModuleNames();
+    setTimeout(function(){
+      runningCommand(moduleArr); 
+    }, 1000);
   }
-  else
-    console.error('A filename should be passed as argument');
+  else{
+    dir.readFiles('./', {
+      match: /.js$/,
+      excludeDir: ['node_modules']
+    }, function(err, content, next) {
+        if (err) throw err;
+        next();
+      },
+      function(err, files){
+        if (err) throw err;
+        fileNames = files;
+        checkPackageJSON();
+        for (var file in fileNames){
+          storingModuleNames(fileNames[file]);
+        }
+
+        setTimeout(function(){
+          runningCommand(moduleArr); 
+        }, 5000);
+      });    
+  }
 };
 
 compute();

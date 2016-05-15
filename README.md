@@ -8,7 +8,7 @@ This is a pretty cool module which reduces the work of repetitive installation o
 $ npm install npm-install-all -g
 ```
 
-## Usage
+## Usage 1 (For a specific file)
 
 ```
 $ npm-install-all <filename>
@@ -18,3 +18,15 @@ $ npm-install-all <filename>
 ```
 $ npm-install-all test.js
 ```
+
+## Usage 2 (For a complete project or folder)
+
+```
+$ npm-install-all
+```
+
+## Example
+```
+$ npm-install-all
+```
+
