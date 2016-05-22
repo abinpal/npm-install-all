@@ -21,10 +21,12 @@ function storingModuleNames(fn){
       var regex = /require\(([^)]+)\)/g;
       var mat = regex.exec(line);
 
-      mat[1] = mat[1].replace(/'/g, '');
-      if (moduleArr.indexOf(mat[1]) == -1) {
-        moduleArr.push(mat[1]);
-      }      
+      if(mat != null){
+        mat[1] = mat[1].replace(/'/g, '');
+        if (moduleArr.indexOf(mat[1]) == -1) {
+          moduleArr.push(mat[1]);
+        } 
+      }       
     }
     }).catch(function(err) {
       console.error(err);
