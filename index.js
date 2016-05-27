@@ -1,13 +1,11 @@
 #!/usr/bin/env node
-
 var lineReader = require('line-reader');
 var exec = require('child_process').exec;
 var Promise = require('bluebird');
 var Handlebars = require('handlebars');
 var dir = require('node-dir');
 var fs = require('fs');
-
-var moduleArr = []; 
+var moduleArr = [];
 var fileName = process.argv[2];
 var fileNames = [];
 
@@ -25,8 +23,8 @@ function storingModuleNames(fn){
         mat[1] = mat[1].replace(/'/g, '');
         if (moduleArr.indexOf(mat[1]) == -1) {
           moduleArr.push(mat[1]);
-        } 
-      }       
+        }
+      }
     }
     }).catch(function(err) {
       console.error(err);
@@ -37,7 +35,7 @@ function runningCommand(modules){
     for (var module in modules){
 
       var localCommand = 'npm install '+modules[module]+' --save';
-      
+
       function puts(error, stdout, stderr) { console.log(stdout) }
       exec(localCommand, puts);
     }
@@ -48,8 +46,8 @@ function checkPackageJSON(){
       if(err == null) {
           //console.log('File exists');
       } else if(err.code == 'ENOENT') {
-          
-          function puts(error, stdout, stderr) { 
+
+          function puts(error, stdout, stderr) {
             var globalModulesPath = stdout;
             var packageTemplatePath = globalModulesPath.trim() + '\\node_modules\\npm-install-all\\template\\template-package-json.hbs';
             var template = fs.readFileSync(packageTemplatePath).toString();
@@ -69,10 +67,10 @@ function checkPackageJSON(){
 
 var compute = function() {
   if(fileName!=null){
-    checkPackageJSON(); 
+    checkPackageJSON();
     storingModuleNames();
     setTimeout(function(){
-      runningCommand(moduleArr); 
+      runningCommand(moduleArr);
     }, 1000);
   }
   else{
@@ -92,9 +90,9 @@ var compute = function() {
         }
 
         setTimeout(function(){
-          runningCommand(moduleArr); 
+          runningCommand(moduleArr);
         }, 5000);
-      });    
+      });
   }
 };
 
