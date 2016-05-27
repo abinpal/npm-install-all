@@ -22,7 +22,10 @@ function storingModuleNames(fn){
       if(mat != null){
         mat[1] = mat[1].replace(/'/g, '');
         if (moduleArr.indexOf(mat[1]) == -1) {
-          moduleArr.push(mat[1]);
+          var rgx = /^[.\/]/g;
+          var modName = rgx.exec(mat[1]);
+          if(modName != null)
+          moduleArr.push(modName[1]);
         }
       }
     }
@@ -32,12 +35,11 @@ function storingModuleNames(fn){
 };
 
 function runningCommand(modules){
+    console.log('INSTALLING THE FOLLOWING MODULES:');
     for (var module in modules){
-
       var localCommand = 'npm install '+modules[module]+' --save';
-
-      function puts(error, stdout, stderr) { console.log(stdout) }
-      exec(localCommand, puts);
+      console.log('├── ',modules[module]);
+      exec(localCommand);
     }
   };
 
