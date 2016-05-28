@@ -8,37 +8,34 @@ var fs = require('fs');
 var moduleArr = [];
 var fileName = process.argv[2];
 var fileNames = [];
- 
+
 function storingModuleNames(fn){
   var eachLine = Promise.promisify(lineReader.eachLine);
     if(process.argv[2]==null){
       fileName = fn;
     }
     eachLine(fileName, function(line) {
-      if (line.indexOf('require') != -1){
-      var regex = /require\(([^)]+)\)/g;
+      var regex = /require\(([^.\/)]+)\)/g;
       var mat = regex.exec(line);
-
       if(mat != null){
         mat[1] = mat[1].replace(/'/g, '');
         if (moduleArr.indexOf(mat[1]) == -1) {
           moduleArr.push(mat[1]);
         }
       }
-    }
     }).catch(function(err) {
       console.error(err);
     });
 };
 
 function runningCommand(modules){
+    console.log('\nINSTALLING THE FOLLOWING MODULES:');
     for (var module in modules){
-
       var localCommand = 'npm install '+modules[module]+' --save';
-
-      function puts(error, stdout, stderr) { console.log(stdout) }
-      exec(localCommand, puts);
+      console.log('├── ',modules[module]);
+      exec(localCommand);
     }
+    console.log('\nPlease wait...');
   };
 
 function checkPackageJSON(){
@@ -46,7 +43,6 @@ function checkPackageJSON(){
       if(err == null) {
           //console.log('File exists');
       } else if(err.code == 'ENOENT') {
-
           function puts(error, stdout, stderr) {
             var globalModulesPath = stdout;
             var packageTemplatePath = globalModulesPath.trim() + '\\node_modules\\npm-install-all\\template\\template-package-json.hbs';

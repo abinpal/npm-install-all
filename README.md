@@ -4,7 +4,7 @@ This is a pretty cool module which reduces the work of repetitive installation o
 
 You just need to run this module from the project directory. This module recursively checks all the folders (excluding node_modules folder) and files of the project or folder where you are running this command and install the npm packages that you are using in your project, and finally saves it into package.json.
 
-## Install
+## Installation
 
 ```
 $ npm install npm-install-all -g
@@ -23,11 +23,6 @@ $ npm-install-all test.js
 
 ## Usage 2 (For a complete project or folder)
 
-```
-$ npm-install-all
-```
-
-## Example
 ```
 $ npm-install-all
 ```
