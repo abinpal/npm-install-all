@@ -39,9 +39,14 @@ You will see all the node modules installed locally and a 'package.json' being c
 
 ## Screenshots
 
-**Output in the console**
+**Output in the console (For a specific js file)**
 
-![](/screenshots/output.PNG?raw=true)
+![](/screenshots/output1.PNG?raw=true)
+
+
+**Output in the console (For a complete project or folder)**
+
+![](/screenshots/output2.PNG?raw=true)
 
 
 **node_modules folder**
