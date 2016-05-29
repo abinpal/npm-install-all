@@ -11,7 +11,8 @@ var fileName = process.argv[2];
 var fileNames = [];
 
 function storingModuleNames(fn){
-  var eachLine = Promise.promisify(lineReader.eachLine);
+  return new Promise(function(resolve, reject){
+    var eachLine = Promise.promisify(lineReader.eachLine);
     if(process.argv[2]==null){
       fileName = fn;
     }
@@ -24,9 +25,14 @@ function storingModuleNames(fn){
           moduleArr.push(mat[1]);
         }
       }
-    }).catch(function(err) {
+    }).then(function(){
+      resolve();
+    })
+    .catch(function(err) {
       console.error(err);
+      reject();
     });
+  }); 
 };
 
 function runningCommand(modules){
@@ -50,7 +56,7 @@ function checkPackageJSON(){
             var template = fs.readFileSync(packageTemplatePath).toString();
             var compiledTemplate = Handlebars.compile(template);
             var packagejson = JSON.parse(compiledTemplate());
-            fs.writeFileSync('package.json', JSON.stringify(packagejson, null, "\t"));
+            fs.writeFile('package.json', JSON.stringify(packagejson, null, "\t"));
           }
 
           var globalPathPrefixCommand = 'npm config get prefix';
@@ -65,9 +71,10 @@ function checkPackageJSON(){
 var compute = function() {
   if(fileName!=null){
     checkPackageJSON();
-    storingModuleNames();
     setTimeout(function(){
+      storingModuleNames().then(function(){
       runningCommand(moduleArr);
+    });
     }, 1000);
   }
   else{
@@ -82,14 +89,15 @@ var compute = function() {
         if (err) throw err;
         fileNames = files;
         checkPackageJSON();
-        for (var file in fileNames){
-          storingModuleNames(fileNames[file]);
-        }
 
-        setTimeout(function(){
-          runningCommand(moduleArr);
-        }, 5000);
-      });
+      for (var file in fileNames){
+        storingModuleNames(fileNames[file]);
+      }
+
+      setTimeout(function(){
+        runningCommand(moduleArr);
+      }, 1000);
+    });
   }
 };
 
