@@ -36,3 +36,21 @@ $ npm-install-all
 ```
 
 You will see all the node modules installed locally and a 'package.json' being created with all the node modules saved in 'dependencies' property.
+
+## Screenshots
+
+**Output in the console**
+
+![](/screenshots/output.PNG?raw=true)
+
+
+**node_modules folder**
+
+![](/screenshots/node-modules.PNG?raw=true)
+
+
+**package.json**
+
+![](/screenshots/package-json.PNG?raw=true)
+
+---
