@@ -4,6 +4,7 @@ var exec = require('child_process').exec;
 var Promise = require('bluebird');
 var Handlebars = require('handlebars');
 var dir = require('node-dir');
+var execSync = require("sync-exec");
 var fs = require('fs');
 var moduleArr = [];
 var fileName = process.argv[2];
@@ -33,15 +34,15 @@ function runningCommand(modules){
     for (var module in modules){
       var localCommand = 'npm install '+modules[module]+' --save';
       console.log('├── ',modules[module]);
-      exec(localCommand);
+      execSync(localCommand);
     }
-    console.log('\nPlease wait...');
+    console.log('\nMODULES INSTALLED AND SAVED INTO package.json...');
   };
 
 function checkPackageJSON(){
     fs.stat('package.json', function(err, stat) {
       if(err == null) {
-          //console.log('File exists');
+        //console.log('File exists');
       } else if(err.code == 'ENOENT') {
           function puts(error, stdout, stderr) {
             var globalModulesPath = stdout;
@@ -49,7 +50,7 @@ function checkPackageJSON(){
             var template = fs.readFileSync(packageTemplatePath).toString();
             var compiledTemplate = Handlebars.compile(template);
             var packagejson = JSON.parse(compiledTemplate());
-            fs.writeFile('package.json', JSON.stringify(packagejson, null, "\t"));
+            fs.writeFileSync('package.json', JSON.stringify(packagejson, null, "\t"));
           }
 
           var globalPathPrefixCommand = 'npm config get prefix';

@@ -1,6 +1,6 @@
 {
   "name": "npm-install-all",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "This is a npm module to install all dependent npm packages for a particular file and save it in package.json. If there doesnt exist a package.json, it creates it and saves the dependencies in it. You just need to run this module from the project directory. This module recursively checks all the folders (excluding node_modules folder) and files of the project or folder where you are running this command and install the npm packages that you are using in your project, and finally saves it into package.json.",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,8 @@
     "bluebird": "^3.3.1",
     "handlebars": "^4.0.5",
     "line-reader": "^0.3.0",
-    "node-dir": "^0.1.12"
+    "node-dir": "^0.1.12",
+    "sync-exec": "^0.6.2"
   },
   "bin": {
     "npm-install-all": "index.js"
