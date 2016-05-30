@@ -75,7 +75,7 @@ var compute = function() {
       storingModuleNames().then(function(){
       runningCommand(moduleArr);
     });
-    }, 1000);
+    }, 3000);
   }
   else{
     dir.readFiles('./', {
@@ -96,7 +96,7 @@ var compute = function() {
 
       setTimeout(function(){
         runningCommand(moduleArr);
-      }, 1000);
+      }, 3000);
     });
   }
 };
