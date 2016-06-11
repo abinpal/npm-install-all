@@ -39,7 +39,10 @@ function runningCommand(modules){
     console.log('\nINSTALLING THE FOLLOWING MODULES:');
     for (var module in modules){
       var localCommand = 'npm install '+modules[module]+' --save';
-      console.log('├── ',modules[module]);
+      if (modules[modules.length - 1] === modules[module])
+        console.log('└── ',modules[module]);
+      else
+        console.log('├── ',modules[module]);
       execSync(localCommand);
     }
     console.log('\nMODULES INSTALLED AND SAVED INTO package.json...');
