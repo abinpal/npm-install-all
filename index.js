@@ -6,6 +6,7 @@ var Handlebars = require('handlebars');
 var dir = require('node-dir');
 var execSync = require("sync-exec");
 var fs = require('fs');
+var path = require('path');
 var moduleArr = [];
 var fileName = process.argv[2];
 var fileNames = [];
@@ -55,14 +56,14 @@ function checkPackageJSON(){
       } else if(err.code == 'ENOENT') {
           function puts(error, stdout, stderr) {
             var globalModulesPath = stdout;
-            var packageTemplatePath = globalModulesPath.trim() + '\\node_modules\\npm-install-all\\template\\template-package-json.hbs';
+            var packageTemplatePath = path.join(globalModulesPath.trim(),'npm-install-all','template','template-package-json.hbs');
             var template = fs.readFileSync(packageTemplatePath).toString();
             var compiledTemplate = Handlebars.compile(template);
             var packagejson = JSON.parse(compiledTemplate());
             fs.writeFile('package.json', JSON.stringify(packagejson, null, "\t"));
           }
 
-          var globalPathPrefixCommand = 'npm config get prefix';
+          var globalPathPrefixCommand = 'npm root -g';
           exec(globalPathPrefixCommand, puts);
           return;
       } else {
